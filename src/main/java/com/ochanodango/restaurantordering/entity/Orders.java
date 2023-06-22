@@ -1,5 +1,7 @@
 package com.ochanodango.restaurantordering.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.time.LocalDateTime;
@@ -12,7 +14,9 @@ public class Orders {
 
 
     private Integer status;
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
+    @TableField(value = "update_time", fill = FieldFill.UPDATE)
     private LocalDateTime updateTime;
     private String detail;
 

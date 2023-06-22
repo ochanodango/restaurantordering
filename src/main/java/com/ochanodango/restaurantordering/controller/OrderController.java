@@ -6,6 +6,7 @@ import com.ochanodango.restaurantordering.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -29,8 +30,8 @@ public class OrderController {
     }
 
     @PostMapping("/add")
-    public R addOrder(@RequestParam Map<String, Objects> data){
-        return R.success(data.toString());
+    public R addOrder(@RequestBody Map<String, String> map){
+        return R.success();
     }
 
 }
