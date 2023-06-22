@@ -19,6 +19,7 @@ public class DishController {
     @GetMapping("/list")
     public R list(){
         List<Dish> list = dishService.list();
+        System.out.println(list.toString());
         return R.success(list, "所有菜品列表");
     }
 
@@ -55,4 +56,46 @@ public class DishController {
         return R.fail("添加菜品失败");
     }
 
+    @PutMapping("/update")
+    public R update(@RequestParam("dishId") Integer dishId, @RequestParam(value = "dishName", required = false) String dishName,
+                    @RequestParam(value = "description", required = false) String description, @RequestParam(value = "price",required = false) Double price,
+                    @RequestParam(value = "imageUrl",required = false) String imageUrl, @RequestParam(value = "categoryId",required = false) Integer categoryId,
+                    @RequestParam(value = "status",required = false)Integer status){
+        Dish dish = dishService.getById(dishId);
+        if(dish != null){
+            if(dishName != null){
+                dish.setDishName(dishName);
+            }
+            if(description != null){
+                dish.setDescription(description);
+            }
+            if(price != null){
+                dish.setPrice(price);
+            }
+            if(imageUrl != null){
+                dish.setImageUrl(imageUrl);
+            }
+            if (categoryId != null) {
+                dish.setCategoryId(categoryId);
+            }
+            if(status != null){
+                dish.setStatus(status);
+            }
+            if(dishService.saveOrUpdate(dish)){
+                return R.success("菜品修改成功");
+            }
+        }
+        return R.fail("菜品修改失败");
+    }
+
+    @DeleteMapping("/delete")
+    public R deteteByName(@RequestParam("dishName") String dishName){
+        Integer dishId = dishService.selectDishName(dishName);
+        if(dishId != -1){
+            if(dishService.removeById(dishId)){
+                return R.success("删除菜品成功");
+            }
+        }
+        return R.fail("删除菜品失败");
+    }
 }

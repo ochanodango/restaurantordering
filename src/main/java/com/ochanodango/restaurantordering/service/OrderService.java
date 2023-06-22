@@ -1,7 +1,10 @@
 package com.ochanodango.restaurantordering.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ochanodango.restaurantordering.entity.Order;
+import com.ochanodango.restaurantordering.entity.Orders;
 
-public interface OrderService extends IService<Order> {
+import java.util.List;
+
+public interface OrderService extends IService<Orders> {
+    List<Orders> selectByStatus(Integer tableId, Integer status);
 }

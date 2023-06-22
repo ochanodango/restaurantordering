@@ -10,6 +10,8 @@ public interface DishService extends IService<Dish> {
 
     Boolean existDishName(String dishName);
 
+    Integer selectDishName(String dishName);
+
     List<Dish> selectByDishName(String dishName);
 
     List<Dish> selectByStatus(Integer status);

@@ -4,16 +4,25 @@ import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.time.LocalDateTime;
 
-public class Order {
-    @TableId(value = "orderId")
+public class Orders {
+    @TableId(value = "order_id")
     private Integer orderId;
     private Integer tableId;
-    private Double total_price;
+    private Double totalPrice;
+
+
     private Integer status;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
     private String detail;
 
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
     public Integer getOrderId() {
         return orderId;
     }
@@ -28,14 +37,6 @@ public class Order {
 
     public void setTableId(Integer tableId) {
         this.tableId = tableId;
-    }
-
-    public Double getTotal_price() {
-        return total_price;
-    }
-
-    public void setTotal_price(Double total_price) {
-        this.total_price = total_price;
     }
 
     public Integer getStatus() {

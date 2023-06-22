@@ -3,15 +3,23 @@ package com.ochanodango.restaurantordering.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 public class Dish {
-    @TableId(value = "dishId")
+    @TableId(value = "dish_id")
     private Integer dishId;
     private String dishName;
     private String description;
     private Double price;
     private String imageUrl;
-    private Integer categroy;
+    private Integer categoryId;
 
     private Integer status;
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public Integer getStatus() {
         return status;
@@ -61,11 +69,4 @@ public class Dish {
         this.imageUrl = imageUrl;
     }
 
-    public Integer getCategroy() {
-        return categroy;
-    }
-
-    public void setCategroy(Integer categroy) {
-        this.categroy = categroy;
-    }
 }

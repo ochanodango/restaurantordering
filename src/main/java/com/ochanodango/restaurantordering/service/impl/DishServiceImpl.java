@@ -44,4 +44,15 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
         }
         return false;
     }
+
+    public Integer selectDishName(String dishName){
+        QueryWrapper<Dish> wrapper = new QueryWrapper<>();
+        wrapper.eq("dishName", dishName);
+        Integer id = dishMapper.selectOne(wrapper).getDishId();
+        if(id != null){
+            return id;
+        }else {
+            return -1;
+        }
+    }
 }
