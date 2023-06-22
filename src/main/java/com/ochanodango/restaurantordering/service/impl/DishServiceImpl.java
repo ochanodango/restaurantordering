@@ -21,4 +21,27 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
         List<Dish> list = dishMapper.selectList(wrapper);
         return list;
     }
+
+    public List<Dish> selectByDishName(String dishName){
+        QueryWrapper<Dish> wrapper = new QueryWrapper<>();
+        wrapper.like("dishName", dishName);
+        List<Dish> list = dishMapper.selectList(wrapper);
+        return list;
+    }
+
+    public List<Dish> selectByStatus(Integer status){
+        QueryWrapper<Dish> wrapper = new QueryWrapper<>();
+        wrapper.eq("status",status);
+        List<Dish> list = dishMapper.selectList(wrapper);
+        return list;
+    }
+
+    public Boolean existDishName(String dishName){
+        QueryWrapper<Dish> wrapper = new QueryWrapper<>();
+        wrapper.eq("dishName", dishName);
+        if(dishMapper.selectOne(wrapper) != null){
+            return true;
+        }
+        return false;
+    }
 }

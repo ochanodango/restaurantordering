@@ -7,4 +7,10 @@ import java.util.List;
 
 public interface DishService extends IService<Dish> {
     List<Dish> selectByCategoryId(Integer categoryId);
+
+    Boolean existDishName(String dishName);
+
+    List<Dish> selectByDishName(String dishName);
+
+    List<Dish> selectByStatus(Integer status);
 }

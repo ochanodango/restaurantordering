@@ -29,7 +29,7 @@ public class AdminController {
             adminService.save(admin);
             return R.success("注册成功");
         }else {
-            return R.fail("注册成功");
+            return R.fail("注册失败");
         }
     }
 
