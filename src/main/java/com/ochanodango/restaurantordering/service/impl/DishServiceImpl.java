@@ -17,14 +17,14 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
 
     public List<Dish> selectByCategoryId(Integer categoryId){
         QueryWrapper<Dish> wrapper = new QueryWrapper<>();
-        wrapper.eq("categoryId", categoryId);
+        wrapper.eq("category_id", categoryId);
         List<Dish> list = dishMapper.selectList(wrapper);
         return list;
     }
 
     public List<Dish> selectByDishName(String dishName){
         QueryWrapper<Dish> wrapper = new QueryWrapper<>();
-        wrapper.like("dishName", dishName);
+        wrapper.like("dish_name", dishName);
         List<Dish> list = dishMapper.selectList(wrapper);
         return list;
     }
@@ -38,7 +38,7 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
 
     public Boolean existDishName(String dishName){
         QueryWrapper<Dish> wrapper = new QueryWrapper<>();
-        wrapper.eq("dishName", dishName);
+        wrapper.eq("dish_name", dishName);
         if(dishMapper.selectOne(wrapper) != null){
             return true;
         }
@@ -47,7 +47,7 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
 
     public Integer selectDishName(String dishName){
         QueryWrapper<Dish> wrapper = new QueryWrapper<>();
-        wrapper.eq("dishName", dishName);
+        wrapper.eq("dish_name", dishName);
         Integer id = dishMapper.selectOne(wrapper).getDishId();
         if(id != null){
             return id;

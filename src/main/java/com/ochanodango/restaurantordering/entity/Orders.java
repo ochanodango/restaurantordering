@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 public class Orders {
     @TableId(value = "order_id")
     private Integer orderId;
+    @TableField(value = "table_id")
     private Integer tableId;
     private Double totalPrice;
 
@@ -16,7 +17,7 @@ public class Orders {
     private Integer status;
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
-    @TableField(value = "update_time", fill = FieldFill.UPDATE)
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
     private String detail;
 

@@ -3,13 +3,12 @@ package com.ochanodango.restaurantordering.controller;
 import com.ochanodango.restaurantordering.common.R;
 import com.ochanodango.restaurantordering.entity.Orders;
 import com.ochanodango.restaurantordering.service.OrderService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/order")
@@ -31,7 +30,37 @@ public class OrderController {
 
     @PostMapping("/add")
     public R addOrder(@RequestBody Map<String, String> map){
+        Integer tableId = Integer.parseInt(map.get("tableId"));
+        map.remove("tableId");
+        JSONObject jsonObject = JSONObject.fromObject(map);
+        String detail = jsonObject.toString();
+        System.out.println(detail);
+        Double price = orderService.totalPrice(map);
+        if (orderService.noPayOrder(tableId) != null){
+            Orders orders = orderService.noPayOrder(tableId);
+            Double oldPrice = orders.getTotalPrice();
+            orders.setTotalPrice(oldPrice + price);
+            orderService.saveOrUpdate(orders);
+        }else {
+            Orders orders = new Orders();
+            orders.setTableId(tableId);
+            orders.setTotalPrice(price);
+            orders.setDetail(detail);
+            orderService.save(orders);
+            orders.toString();
+        }
+
         return R.success();
     }
+
+    @GetMapping("/pay")
+    public R confirmPay(@RequestParam("tableId") Integer tableId) {
+        Orders orders = orderService.selectByTableId(tableId);
+        orders.setStatus(1);
+        orderService.saveOrUpdate(orders);
+        return R.success("支付成功");
+    }
+
+
 
 }
