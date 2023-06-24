@@ -1,13 +1,18 @@
 package com.ochanodango.restaurantordering.controller;
 
 import com.ochanodango.restaurantordering.common.R;
+import com.ochanodango.restaurantordering.entity.Categroy;
 import com.ochanodango.restaurantordering.entity.Dish;
 import com.ochanodango.restaurantordering.service.CategroyService;
 import com.ochanodango.restaurantordering.service.DishService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/dish")
@@ -21,6 +26,23 @@ public class DishController {
         List<Dish> list = dishService.list();
         System.out.println(list.toString());
         return R.success(list, "所有菜品列表");
+    }
+
+    @GetMapping("/listCategory")
+    public R listCategory(){
+        List<Categroy> categroys = categroyService.list();
+        ArrayList<JSONObject> list = new ArrayList<>();
+        categroys.forEach(item -> {
+            JSONObject jsonObject = new JSONObject();
+            Integer categroyId = item.getCategroyId();
+            String type = item.getType();
+            List<Dish> children = dishService.selectByCategoryId(categroyId);
+            jsonObject.put("categoryId", categroyId);
+            jsonObject.put("type", type);
+            jsonObject.put("children", children);
+            list.add(jsonObject);
+        });
+        return R.success(list);
     }
 
     @GetMapping("/categoryId")
