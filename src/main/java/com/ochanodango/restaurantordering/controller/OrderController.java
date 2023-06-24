@@ -3,10 +3,14 @@ package com.ochanodango.restaurantordering.controller;
 import com.ochanodango.restaurantordering.common.R;
 import com.ochanodango.restaurantordering.entity.Orders;
 import com.ochanodango.restaurantordering.service.OrderService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,11 +26,13 @@ public class OrderController {
         return R.success(list, "全部订单查询");
     }
 
-    @GetMapping("/tableId")
+    @GetMapping("/tableIdd")
     public R tableOrder(@RequestParam("tableId") Integer tableId){
         List<Orders> list = orderService.selectByStatus(tableId, 0);
         return R.success(list);
     }
+
+
 
     @PostMapping("/add")
     public R addOrder(@RequestBody Map<String, String> map){
@@ -45,11 +51,18 @@ public class OrderController {
             Orders orders = new Orders();
             orders.setTableId(tableId);
             orders.setTotalPrice(price);
-            orders.setDetail(detail);
+            //orders.setDetail(detail);
             orderService.save(orders);
             orders.toString();
         }
 
+        return R.success();
+    }
+
+    @GetMapping("/addd")
+    public R addd(@RequestParam("table_id") Integer tableId, @RequestParam("content") List<Object> content){
+        System.out.println(tableId);
+        System.out.println(content.toString());
         return R.success();
     }
 

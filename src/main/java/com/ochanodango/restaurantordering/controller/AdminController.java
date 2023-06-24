@@ -33,7 +33,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public R login(@RequestParam("id") Integer id, @RequestParam("password") String password ){
         if(adminService.getById(id) != null ){
            Admin admin = adminService.getById(id);

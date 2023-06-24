@@ -1,78 +1,26 @@
 package com.ochanodango.restaurantordering.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
 
 import java.time.LocalDateTime;
-
+@Data
 public class Orders {
-    @TableId(value = "order_id")
+    @TableId(value = "order_id",type = IdType.AUTO)
     private Integer orderId;
     @TableField(value = "table_id")
     private Integer tableId;
     private Double totalPrice;
-
-
     private Integer status;
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-    private String detail;
+    private String content;
 
-    public Double getTotalPrice() {
-        return totalPrice;
-    }
+    private String remarkmessage;
 
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-
-    public Integer getTableId() {
-        return tableId;
-    }
-
-    public void setTableId(Integer tableId) {
-        this.tableId = tableId;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
 }
