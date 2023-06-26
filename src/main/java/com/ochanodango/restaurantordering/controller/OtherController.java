@@ -22,8 +22,6 @@ public class OtherController {
     @Autowired
     private OrderService orderService;
     @Autowired
-    private ContentService contentService;
-    @Autowired
     private CategroyService categroyService;
 
     @GetMapping("/food/list")
